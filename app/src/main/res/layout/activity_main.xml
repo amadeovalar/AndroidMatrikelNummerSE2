@@ -48,11 +48,23 @@
         android:layout_width="152dp"
         android:layout_height="50dp"
         android:text="@string/ButtonLabel"
+        android:onClick="onClickSubmit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ServerAntwortLabel"
         app:layout_constraintVertical_bias="0.496" />
+
+
+    <TextView
+        android:id="@+id/serverMessage"
+        android:layout_width="308dp"
+        android:layout_height="51dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/submit_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ServerAntwortLabel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
