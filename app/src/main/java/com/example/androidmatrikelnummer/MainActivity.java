@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 //        Identify the text message where the server message will be displayed
         messageFromServer = findViewById(R.id.serverMessage);
 
+        Log.v("Empty", String.valueOf(matrikelNummerInput.getText().toString().isEmpty()));
+
 
 //
 //        Create a click lister
@@ -48,50 +50,69 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickSubmit(View view) {
 
-        matrNr = Integer.parseInt(matrikelNummerInput.getText().toString());
+        if (matrikelNummerInput.getText().toString().isEmpty()) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+//                            turn text to visible
+                    messageFromServer.setVisibility(View.VISIBLE);
+//                            show the message in the textview
+                    messageFromServer.setText("Gib deine Matrikelnummer ein!");
+                }
+            });
+
+        } else {
+            submitButton.setEnabled(true);
+            matrNr = Integer.parseInt(matrikelNummerInput.getText().toString());
 
 //        Initiate a new thread
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Socket socket = new Socket(serverName, portNumber);
-                    Log.v("Connected", socket.getRemoteSocketAddress().toString());
+            new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+
+
+                    try {
+                        Socket socket = new Socket(serverName, portNumber);
+                        Log.v("Connected", socket.getRemoteSocketAddress().toString());
 
 //                    sending the MatNr. to the server
 //                    DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
 //                    dataOutputStream.writeByte(matrNr);
 
-                    PrintWriter toServer = new PrintWriter(socket.getOutputStream(), true);
-                    toServer.println(matrNr);
+                        PrintWriter toServer = new PrintWriter(socket.getOutputStream(), true);
+                        toServer.println(matrNr);
 
 
 //                    Log.v("DataOutput", dataOutputStream.toString());
 
 
 //                    Reading the the server incomming message
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    String serverMessage = bufferedReader.readLine();
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                        String serverMessage = bufferedReader.readLine();
 
-                    Log.v("EditText", matrikelNummerInput.getText().toString());
-                    Log.v("ServerMessage", serverMessage);
+                        Log.v("EditText", matrikelNummerInput.getText().toString());
+                        Log.v("ServerMessage", serverMessage);
 
 //                    returning back to the UI thread from worker thread
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
 //                            turn text to visible
-                            messageFromServer.setVisibility(View.VISIBLE);
+                                messageFromServer.setVisibility(View.VISIBLE);
 //                            show the message in the textview
-                            messageFromServer.setText(serverMessage);
-                        }
-                    });
+                                messageFromServer.setText(serverMessage);
+                            }
+                        });
 
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
-            }
-        }).start();
+
+            }).start();
+
+        }
 
     }
 
