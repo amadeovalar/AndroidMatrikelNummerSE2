@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
@@ -39,10 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
 //
 //        Create a click lister
-        submitButton.setOnClickListener(view -> {
-            Log.v("EditText", matrikelNummerInput.getText().toString());
-
-        });
+        submitButton.setOnClickListener(view -> Log.v("EditText", matrikelNummerInput.getText().toString()));
 
     }
 
@@ -54,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try {
                     Socket socket = new Socket(serverName, portNumber);
+
+//                    sending the MatNr. to the server
+                    DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+                    dataOutputStream.writeUTF(String.valueOf(matrikelNummerInput));
 
 //                    Reading the the server message
                     BufferedReader bufferedReader =
