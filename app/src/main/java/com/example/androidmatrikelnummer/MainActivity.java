@@ -80,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+//                            turn text to visible
+                            messageFromServer.setVisibility(View.VISIBLE);
 //                            show the message in the textview
                             messageFromServer.setText(serverMessage);
                         }
