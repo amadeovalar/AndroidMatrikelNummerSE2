@@ -13,12 +13,14 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity {
 
     Button submitButton;
     EditText matrikelNummerInput;
+    Integer matrNr;
     TextView messageFromServer;
 
     String serverName = "se2-isys.aau.at";
@@ -40,11 +42,13 @@ public class MainActivity extends AppCompatActivity {
 
 //
 //        Create a click lister
-        submitButton.setOnClickListener(view -> Log.v("EditText", matrikelNummerInput.getText().toString()));
+//        submitButton.setOnClickListener(view -> Log.v("EditText", matrikelNummerInput.getText().toString()));
 
     }
 
     public void onClickSubmit(View view) {
+
+        matrNr = Integer.parseInt(matrikelNummerInput.getText().toString());
 
 //        Initiate a new thread
         new Thread(new Runnable() {
@@ -52,20 +56,31 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try {
                     Socket socket = new Socket(serverName, portNumber);
+                    Log.v("Connected", socket.getRemoteSocketAddress().toString());
 
 //                    sending the MatNr. to the server
-                    DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
-                    dataOutputStream.writeUTF(String.valueOf(matrikelNummerInput));
+//                    DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+//                    dataOutputStream.writeByte(matrNr);
 
-//                    Reading the the server message
-                    BufferedReader bufferedReader =
-                            new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                    PrintWriter toServer = new PrintWriter(socket.getOutputStream(), true);
+                    toServer.println(matrNr);
+
+
+//                    Log.v("DataOutput", dataOutputStream.toString());
+
+
+//                    Reading the the server incomming message
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     String serverMessage = bufferedReader.readLine();
+
+                    Log.v("EditText", matrikelNummerInput.getText().toString());
+                    Log.v("ServerMessage", serverMessage);
 
 //                    returning back to the UI thread from worker thread
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+//                            show the message in the textview
                             messageFromServer.setText(serverMessage);
                         }
                     });
