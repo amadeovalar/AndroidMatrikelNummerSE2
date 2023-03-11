@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AndroidMatrikelNummer</string>
+    <string name="MatrikelNUmmerLabel">Gib deine Matrikelnummer ein!</string>
+    <string name="ServerAntwortLabel">Antwort vom Server</string>
+
+    <string name="ButtonLabel">Abschicken</string>
+
+
+</resources>
