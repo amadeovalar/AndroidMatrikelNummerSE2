@@ -146,25 +146,37 @@ public class MainActivity extends AppCompatActivity {
                 numbers.add(Character.getNumericValue(c));
             }
 
+//            Filter the prime numbers
+            ArrayList<Integer> Primes = new ArrayList<>();
+            for (int number : numbers){
+                if (isPrime(number)){
+                    Primes.add(number);
+                }
+            }
+            numbers.removeAll(Primes);
 
 
-//            int[] numbers = new int[chars.length];
-//            for(int i = 0; i < chars.length; i++){
-//                numbers[i] = Character.getNumericValue(chars[i]);
-//            }
-
-////            Sort the numbers
-//            Arrays.sort(numbers);
-
-////            Display the sorted array
-////            turn text to visible
-//            messageFromServer.setVisibility(View.VISIBLE);
-////                            show the message in the textview
-//            messageFromServer.setText(Arrays.toString(numbers));
+//            Display the sorted array
+//            turn text to visible
+            messageFromServer.setVisibility(View.VISIBLE);
+//                            show the message in the textview
+            messageFromServer.setText(numbers.toString());
 
         }
 
 
+    }
+
+    public static boolean isPrime(int n){
+        if (n <= 1){
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(n); i++){
+            if(n % i == 0){
+                return false;
+            }
+        }
+        return true;
     }
 
 }
