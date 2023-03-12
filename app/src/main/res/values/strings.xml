@@ -6,6 +6,7 @@
     <string name="ButtonLabel">Abschicken</string>
     <string name="ButtonLabelBerechnen">Berechnen</string>
 
+    <string name="ToastMessageEmptyInput">No input!</string>
 
 
 </resources>

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -59,10 +60,9 @@ public class MainActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-//                            turn text to visible
-                    messageFromServer.setVisibility(View.VISIBLE);
-//                            show the message in the textview
-                    messageFromServer.setText("Gib deine Matrikelnummer ein!");
+                    String noInputMessage = getResources().getString(R.string.ToastMessageEmptyInput);
+//                    Create a 'Toast' message, to inform the user that the input is empty
+                    Toast.makeText(MainActivity.this, noInputMessage, Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -126,8 +126,9 @@ public class MainActivity extends AppCompatActivity {
         String matrikelNummerString = matrikelNummerInput.getText().toString();
 
         if (matrikelNummerString.isEmpty()) {
-
-
+            String noInputMessage = getResources().getString(R.string.ToastMessageEmptyInput);
+//                    Create a 'Toast' message, to inform the user that the input is empty
+            Toast.makeText(MainActivity.this, noInputMessage, Toast.LENGTH_SHORT).show();
         } else {
 
 //            Create a character array
