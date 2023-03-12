@@ -155,12 +155,19 @@ public class MainActivity extends AppCompatActivity {
             }
             numbers.removeAll(Primes);
 
+//            Making a single number out of the array
+            StringBuilder sb = new StringBuilder();
+            for (int number : numbers){
+                sb.append(number);
+            }
+            String concatNumber = sb.toString();
+
 
 //            Display the sorted array
 //            turn text to visible
             messageFromServer.setVisibility(View.VISIBLE);
 //                            show the message in the textview
-            messageFromServer.setText(numbers.toString());
+            messageFromServer.setText(concatNumber);
 
         }
 
