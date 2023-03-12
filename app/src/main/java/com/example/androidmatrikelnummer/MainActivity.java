@@ -16,7 +16,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.stream.IntStream;
 
 public class MainActivity extends AppCompatActivity {
@@ -129,22 +131,36 @@ public class MainActivity extends AppCompatActivity {
         } else {
 
 //            Create a character array
-            char[] chars = matrikelNummerString.toCharArray();
-
-//            Convert each char to an int an store it in the array
-            int[] numbers = new int[chars.length];
-            for(int i = 0; i < chars.length; i++){
-                numbers[i] = Character.getNumericValue(chars[i]);
+            ArrayList<Character> chars = new ArrayList<>();
+//            Add the individual characters to the ArrayList
+            for (char c : matrikelNummerString.toCharArray()){
+                chars.add(c);
             }
 
-//            Sort the numbers
-            Arrays.sort(numbers);
+//            Sort the characters
+            Collections.sort(chars);
 
-//            Display the sorted array
-//            turn text to visible
-            messageFromServer.setVisibility(View.VISIBLE);
-//                            show the message in the textview
-            messageFromServer.setText(Arrays.toString(numbers));
+//            Convert the chars to integers (for calculating if there are primes in the list)
+            ArrayList<Integer> numbers = new ArrayList<>();
+            for (char c : chars){
+                numbers.add(Character.getNumericValue(c));
+            }
+
+
+
+//            int[] numbers = new int[chars.length];
+//            for(int i = 0; i < chars.length; i++){
+//                numbers[i] = Character.getNumericValue(chars[i]);
+//            }
+
+////            Sort the numbers
+//            Arrays.sort(numbers);
+
+////            Display the sorted array
+////            turn text to visible
+//            messageFromServer.setVisibility(View.VISIBLE);
+////                            show the message in the textview
+//            messageFromServer.setText(Arrays.toString(numbers));
 
         }
 
