@@ -63,9 +63,21 @@
         android:layout_height="51dp"
         android:text="TextView"
         android:visibility="invisible"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/submit_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ServerAntwortLabel" />
+
+    <Button
+        android:id="@+id/berechnenButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ButtonLabelBerechnen"
+        android:onClick="onClickBerechnen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/submit_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

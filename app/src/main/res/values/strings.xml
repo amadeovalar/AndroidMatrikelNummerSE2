@@ -4,6 +4,8 @@
     <string name="ServerAntwortLabel">Antwort vom Server</string>
 
     <string name="ButtonLabel">Abschicken</string>
+    <string name="ButtonLabelBerechnen">Berechnen</string>
+
 
 
 </resources>

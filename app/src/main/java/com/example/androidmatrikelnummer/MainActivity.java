@@ -14,7 +14,10 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.net.Socket;
+import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -113,6 +116,38 @@ public class MainActivity extends AppCompatActivity {
             }).start();
 
         }
+
+    }
+
+    public void onClickBerechnen(View view){
+//        Get the user input text
+        String matrikelNummerString = matrikelNummerInput.getText().toString();
+
+        if (matrikelNummerString.isEmpty()) {
+
+
+        } else {
+
+//            Create a character array
+            char[] chars = matrikelNummerString.toCharArray();
+
+//            Convert each char to an int an store it in the array
+            int[] numbers = new int[chars.length];
+            for(int i = 0; i < chars.length; i++){
+                numbers[i] = Character.getNumericValue(chars[i]);
+            }
+
+//            Sort the numbers
+            Arrays.sort(numbers);
+
+//            Display the sorted array
+//            turn text to visible
+            messageFromServer.setVisibility(View.VISIBLE);
+//                            show the message in the textview
+            messageFromServer.setText(Arrays.toString(numbers));
+
+        }
+
 
     }
 
